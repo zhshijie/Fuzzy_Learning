@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5F4145CE1AEF87D20053CA2E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F4145CD1AEF87D20053CA2E /* main.cpp */; };
+		5F4145D71AEF88990053CA2E /* FuzzyModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F4145D51AEF88990053CA2E /* FuzzyModule.cpp */; };
+		5F4145DA1AEF8EE30053CA2E /* FuzzySet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F4145D81AEF8EE30053CA2E /* FuzzySet.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +27,10 @@
 /* Begin PBXFileReference section */
 		5F4145CA1AEF87D20053CA2E /* Fuzzy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Fuzzy; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F4145CD1AEF87D20053CA2E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		5F4145D51AEF88990053CA2E /* FuzzyModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FuzzyModule.cpp; sourceTree = "<group>"; };
+		5F4145D61AEF88990053CA2E /* FuzzyModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FuzzyModule.h; sourceTree = "<group>"; };
+		5F4145D81AEF8EE30053CA2E /* FuzzySet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FuzzySet.cpp; sourceTree = "<group>"; };
+		5F4145D91AEF8EE30053CA2E /* FuzzySet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FuzzySet.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,9 +63,21 @@
 		5F4145CC1AEF87D20053CA2E /* Fuzzy */ = {
 			isa = PBXGroup;
 			children = (
+				5F4145D41AEF88890053CA2E /* Base */,
 				5F4145CD1AEF87D20053CA2E /* main.cpp */,
 			);
 			path = Fuzzy;
+			sourceTree = "<group>";
+		};
+		5F4145D41AEF88890053CA2E /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				5F4145D51AEF88990053CA2E /* FuzzyModule.cpp */,
+				5F4145D61AEF88990053CA2E /* FuzzyModule.h */,
+				5F4145D81AEF8EE30053CA2E /* FuzzySet.cpp */,
+				5F4145D91AEF8EE30053CA2E /* FuzzySet.h */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -118,6 +136,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F4145DA1AEF8EE30053CA2E /* FuzzySet.cpp in Sources */,
+				5F4145D71AEF88990053CA2E /* FuzzyModule.cpp in Sources */,
 				5F4145CE1AEF87D20053CA2E /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
