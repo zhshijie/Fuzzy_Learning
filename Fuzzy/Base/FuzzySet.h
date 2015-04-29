@@ -10,7 +10,7 @@
 #define __Fuzzy__FuzzySet__
 
 #include <stdio.h>
-
+#include <cassert>
 /*
  * 模糊集合的基类
  *
@@ -29,13 +29,16 @@ public:
     virtual double CalculateDOM(double val)const = 0;
     
     //如果这个模糊集合是一个结果模糊语言变量的一部分，并且它符合一条规则，那么这种方法设置隶属度参数值的最大或这个集合存在的m_dDOM值（在这个背景下，隶属度代表一种置信度水平）
-    void ORwithDOM(double val);
-    
+    void ORwithDOM(double val){if (val > m_dDOM) m_dDOM = val;}
     //附属方法
-    double GetRepresentativeVal()const;
+    double GetRepresentativeVal()const{return m_dRepresentativeValue;};
     void ClearDOM(){m_dDOM = 0.0;}
     double GetDOM()const {return m_dDOM;}
-    void SetDOM(double val);
+    void SetDOM(double val)
+    {
+        assert ((val <=1) && (val >= 0) && "<FuzzySet::SetDOM>: invalid value");
+        m_dDOM = val;
+    }
 };
 
 

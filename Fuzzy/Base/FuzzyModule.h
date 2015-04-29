@@ -51,13 +51,13 @@ public:
 };
 
 
-void FuzzyModule::Fuzzify(const std::string &NameOfFLV, double val)
+inline void FuzzyModule::Fuzzify(const std::string &NameOfFLV, double val)
 {
     assert(m_Variables.find(NameOfFLV)!=m_Variables.end()&&"<FuzzyModule::Fuzzify>: key is not found");
     m_Variables[NameOfFLV]->Fuzzify(val);
 }
 
-double FuzzyModule::DeFuzzify(const std::string &key, FuzzyModule::DefuzzifyType method)
+inline double FuzzyModule::DeFuzzify(const std::string &key, FuzzyModule::DefuzzifyType method)
 {
     assert(m_Variables.find(key)!=m_Variables.end()&&"<FuzzyModule::DeFuzzify>: key is not found");
     
@@ -75,6 +75,15 @@ double FuzzyModule::DeFuzzify(const std::string &key, FuzzyModule::DefuzzifyType
             return m_Variables[key]->DeFuzzifyMaxAv();
         default:
             break;
+    }
+}
+
+inline void FuzzyModule::SetConfidencesOfConsequentsToZero()
+{
+    std::vector<FuzzyRule*>::iterator curRule = m_Rules.begin();
+    for (curRule; curRule != m_Rules.end(); ++curRule)
+    {
+        (*curRule)->SetConfidenceOfConsequentToZero();
     }
 }
 

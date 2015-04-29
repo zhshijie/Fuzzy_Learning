@@ -23,7 +23,7 @@ double FuzzySet_Triangle::CalculateDOM(double val)const
         return  grad*(val - (m_dPeakPoint -m_dLeftOffset));
     }
     
-    if ((val >=m_dPeakPoint)&&val <= m_dPeakPoint+m_dRightOffset) {
+   else if ((val >=m_dPeakPoint)&&val <= m_dPeakPoint+m_dRightOffset) {
         double grad = 1.0/-m_dRightOffset;
         return grad*(val - m_dPeakPoint)+1.0;
     }
@@ -68,11 +68,11 @@ double FuzzySet_LeftShoulder::CalculateDOM(double val)const{
     
     //若是在中间的右边，寻找隶属度
     if ((val >m_dPeakPoint)&&val<=m_dPeakPoint+m_dRightOffset) {
-        double grad = -1.0/m_dRightOffset;
-        return grad*(val - (m_dPeakPoint+ m_dLeftOffset)) +1;
+        double grad = 1.0/m_dRightOffset;
+        return grad*((m_dPeakPoint+ m_dRightOffset)-val);
     }
     //若在中间的右边，寻找隶属度
-    else if (val<m_dPeakPoint)
+    else if (val<=m_dPeakPoint)
     {
         return 1.0;
     }

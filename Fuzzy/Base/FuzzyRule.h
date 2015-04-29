@@ -24,7 +24,7 @@ private:
     FuzzyRule& operator = (const FuzzyRule&);
     
 public:
-    FuzzyRule(FuzzyTerm & ant,FuzzyTerm con):m_pAntecedent(ant.Clone()),m_pConsequence(con.Clone()){}
+    FuzzyRule(FuzzyTerm & ant,FuzzyTerm &con):m_pAntecedent(ant.Clone()),m_pConsequence(con.Clone()){}
     
     ~FuzzyRule(){delete m_pConsequence;delete m_pConsequence;}
     

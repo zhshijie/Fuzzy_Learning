@@ -26,9 +26,14 @@ void FuzzyVariable::Fuzzify(double val)
     
     MemberSets::iterator it;
     for (it = m_MemberSets.begin(); it!=m_MemberSets.end(); ++it) {
-        it->second->CalculateDOM(val);
+        
+       it->second->SetDOM( it->second->CalculateDOM(val));
     }
 }
+
+
+
+
 
 
 //使用最大值平均的方法对这个变量去模糊化
@@ -39,6 +44,7 @@ double FuzzyVariable:: DeFuzzifyMaxAv()const{
     MemberSets::const_iterator it;
     for (it = m_MemberSets.begin(); it!=m_MemberSets.end(); it++) {
         bottom += it->second->GetDOM();
+        
         top += it->second->GetRepresentativeVal() * it->second->GetDOM();
     }
     
@@ -98,12 +104,14 @@ FzSet FuzzyVariable::AddRightShoulderSet(std::string name,
                           double maxBound)
 {
     m_MemberSets[name] = new FuzzySet_RightShoulder(peak,peak-minBound,maxBound-peak);
+    AdjustRangeToFit(minBound, maxBound);
     return FzSet(*m_MemberSets[name]);
 }
+
 FzSet FuzzyVariable::AddTriangularSet(std::string name,
-                       double minBound,
-                       double peak,
-                       double maxBound)
+                                      double       minBound,
+                                      double       peak,
+                                      double       maxBound)
 {
     m_MemberSets[name] = new FuzzySet_Triangle(peak,
                                                peak-minBound,
@@ -112,8 +120,15 @@ FzSet FuzzyVariable::AddTriangularSet(std::string name,
     AdjustRangeToFit(minBound, maxBound);
     
     return FzSet(*m_MemberSets[name]);
-
 }
+
+
+void FuzzyVariable::AdjustRangeToFit(double minBound, double maxBound)
+{
+    if (minBound < m_dMinRange) m_dMinRange = minBound;
+    if (maxBound > m_dMaxRange) m_dMaxRange = maxBound;
+}
+
 
 
 
