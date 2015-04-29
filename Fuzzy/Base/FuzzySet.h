@@ -11,6 +11,11 @@
 
 #include <stdio.h>
 
+/*
+ * 模糊集合的基类
+ *
+ */
+
 class FuzzySet {
 protected:
     //在这个集合中，将保持这个隶属度为一个给定的值
@@ -32,5 +37,68 @@ public:
     double GetDOM()const {return m_dDOM;}
     void SetDOM(double val);
 };
+
+
+/*
+ * 三角形模糊集合
+ *
+ */
+
+
+class FuzzySet_Triangle:public FuzzySet {
+private:
+    //这些值定义模糊变量的形状
+    double m_dPeakPoint;
+    double m_dLeftOffset;
+    double m_dRightOffset;
+    
+public:
+    FuzzySet_Triangle(double mid,double left,double right):FuzzySet(mid),m_dPeakPoint(mid),m_dLeftOffset(left),m_dRightOffset(right){}
+    //这种方法计算一个特殊值的隶属度
+    double CalculateDOM(double val) const;
+};
+
+
+/*
+ * 右肩模糊集合
+ *
+ */
+
+class FuzzySet_RightShoulder:public FuzzySet {
+private:
+    //这个值定义模糊语言变量的形状
+    double m_dPeakPoint;
+    double m_dLeftOffset;
+    double m_dRightOffset;
+public:
+    
+    FuzzySet_RightShoulder(double peak,double LeftOffset,double Rightset):FuzzySet(((peak+Rightset)+peak)/2),m_dPeakPoint(peak),m_dLeftOffset(LeftOffset),m_dRightOffset(Rightset){}
+    
+    //这个方法为一个特点的值计算隶属度
+    double CalculateDOM(double val)const;
+};
+
+
+/*
+ * 左肩模糊集合
+ *
+ */
+
+
+class FuzzySet_LeftShoulder:public FuzzySet {
+    //这个值定义模糊语言变量的形状
+    double m_dPeakPoint;
+    double m_dLeftOffset;
+    double m_dRightOffset;
+    
+public:
+    FuzzySet_LeftShoulder(double peak,double LeftOffset,double Rightset):FuzzySet(((peak-LeftOffset)+peak)/2),m_dPeakPoint(peak),m_dLeftOffset(LeftOffset),m_dRightOffset(Rightset){}
+    
+    //这个方法为一个特点的值计算隶属度
+    double CalculateDOM(double val)const;
+};
+
+
+
 
 #endif /* defined(__Fuzzy__FuzzySet__) */

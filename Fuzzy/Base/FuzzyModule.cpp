@@ -7,3 +7,12 @@
 //
 
 #include "FuzzyModule.h"
+#include "FuzzyTerm.h"
+
+
+void FuzzyModule::AddRule(FuzzyTerm &antecedent, FuzzyTerm &consequence)
+{
+    m_Rules.push_back(new FuzzyRule(antecedent,consequence));
+}
+
+

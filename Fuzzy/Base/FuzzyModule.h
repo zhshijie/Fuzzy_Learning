@@ -13,11 +13,14 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <cassert>
+#include "FuzzyVariable.h"
+#include "FuzzyRule.h"
 
-
-class FuzzyVariable;
 class FuzzyRule;
 class FuzzyTerm;
+
+const int NumSamples  = 10;
 
 class FuzzyModule {
     
@@ -47,5 +50,32 @@ public:
     inline double DeFuzzify(const std::string& key,DefuzzifyType method);
 };
 
+
+void FuzzyModule::Fuzzify(const std::string &NameOfFLV, double val)
+{
+    assert(m_Variables.find(NameOfFLV)!=m_Variables.end()&&"<FuzzyModule::Fuzzify>: key is not found");
+    m_Variables[NameOfFLV]->Fuzzify(val);
+}
+
+double FuzzyModule::DeFuzzify(const std::string &key, FuzzyModule::DefuzzifyType method)
+{
+    assert(m_Variables.find(key)!=m_Variables.end()&&"<FuzzyModule::DeFuzzify>: key is not found");
+    
+    SetConfidencesOfConsequentsToZero();
+    std::vector<FuzzyRule*>::iterator curRule = m_Rules.begin();
+    for (; curRule!=m_Rules.end(); ++curRule) {
+        (*curRule)->Calculate();
+    }
+    
+    switch (method) {
+        case centroid:
+            return m_Variables[key]->DeFuzzifyCentroid(NumSamples);
+            break;
+        case max_av:
+            return m_Variables[key]->DeFuzzifyMaxAv();
+        default:
+            break;
+    }
+}
 
 #endif /* defined(__Fuzzy__FuzzyModule__) */
